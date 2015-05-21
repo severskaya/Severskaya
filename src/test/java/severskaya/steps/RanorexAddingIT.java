@@ -43,15 +43,6 @@ public class RanorexAddingIT extends ScenarioSteps {
     }
 
     @Step
-    public void checkTablesRow(int numberOfRow, String expectedFirstName,
-                               String expectedLastName, String expectedGender, String expectedCategory){
-        assertEquals(page.getFirstNameValueOfPerson(numberOfRow).getText(), expectedFirstName);
-        assertEquals(page.getLastNameValueOfPerson(numberOfRow).getText(), expectedLastName);
-        assertEquals(page.getGenderValueOfPerson(numberOfRow).getText(), expectedGender);
-        assertEquals(page.getCategoryValueOfPerson(numberOfRow).getText(), expectedCategory);
-    }
-
-    @Step
     public void selectRadioButtonForRow(int numberOfRow) {
         page.getTableRadioButton(numberOfRow).click();
     }
@@ -62,9 +53,29 @@ public class RanorexAddingIT extends ScenarioSteps {
     }
 
     @Step
+    public void isActualFirstNameEqualsWithExpected(int numberOfRow, String expectedFirstName){
+        assertEquals("First Name не соответствуют", page.getFirstNameValueOfPerson(numberOfRow).getText(), expectedFirstName);
+    }
+
+    @Step
+    public void isActualLastNameEqualsWithExpected(int numberOfRow, String expectedLastName){
+        assertEquals("Last Name не соответствуют", page.getLastNameValueOfPerson(numberOfRow).getText(), expectedLastName);
+    }
+
+    @Step
+    public void isActualGenderEqualsWithExpected(int numderOfRow, String expectedGender){
+        assertEquals("Gender не соответствуют", page.getGenderValueOfPerson(numderOfRow).getText(), expectedGender);
+    }
+
+    @Step
+    public void isActualCategoryEqualsWithExpected(int numberOfRow, String expectedCategory){
+        assertEquals("Category не соответствуют", page.getCategoryValueOfPerson(numberOfRow).getText(), expectedCategory);
+    }
+
+    @Step
     public void checkIfRowsDeleted(int expectedCountOfRows){
         int actualCountOfRowsAfterDelete = page.getAllTableElements().size();
-        assertEquals(actualCountOfRowsAfterDelete, expectedCountOfRows);
+        assertEquals("Количество строк не совпадают", actualCountOfRowsAfterDelete, expectedCountOfRows);
     }
 }
 

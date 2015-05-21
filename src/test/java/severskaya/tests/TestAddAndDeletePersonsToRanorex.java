@@ -14,13 +14,13 @@ import severskaya.steps.RanorexAddingIT;
 @RunWith(SerenityRunner.class)
 public class TestAddAndDeletePersonsToRanorex {
 
-    private String expectedFirstName = "Cat";
-    private String expectedLastName = "Catsvill";
+    private String expectedFirstName1 = "Cat";
+    private String expectedLastName1 = "Catsvill";
     private String Gender1 = "male";
     private String Gender2 = "female";
     private String expectedGender1 = "Male";
     private String expectedGender2 = "Female";
-    private String expectedCategory = "Music";
+    private String expectedCategory1 = "Music";
     private String expectedCategory2 = "Sport";
     private String expectedFirstName2 = "Dog";
     private String expectedLastName2 = "Doggy";
@@ -32,7 +32,7 @@ public class TestAddAndDeletePersonsToRanorex {
 
     @BeforeClass
     public static void setIp(){
-        String pathToChromeDriver = "/home/gatto/Desktop/chromedriver";
+        String pathToChromeDriver = "/home/nsieverska/Desktop/chromedriver";
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
     }
 
@@ -44,14 +44,18 @@ public class TestAddAndDeletePersonsToRanorex {
 
     @Test
     public void addTwoPersonsTest(){
+
         steps.openPage();
-        steps.enterFirstName(expectedFirstName);
-        steps.enterLastName(expectedLastName);
-        steps.selectCategory(expectedCategory);
+        steps.enterFirstName(expectedFirstName1);
+        steps.enterLastName(expectedLastName1);
+        steps.selectCategory(expectedCategory1);
         steps.selectGender(Gender1);
         steps.clickAddButton();
 
-        steps.checkTablesRow(numberOfFirstRow, expectedFirstName, expectedLastName, expectedGender1, expectedCategory);
+        steps.isActualFirstNameEqualsWithExpected(numberOfFirstRow, expectedFirstName1);
+        steps.isActualLastNameEqualsWithExpected(numberOfFirstRow, expectedLastName1);
+        steps.isActualGenderEqualsWithExpected(numberOfFirstRow, expectedGender1);
+        steps.isActualCategoryEqualsWithExpected(numberOfFirstRow, expectedCategory1);
 
         steps.enterFirstName(expectedFirstName2);
         steps.enterLastName(expectedLastName2);
@@ -59,15 +63,19 @@ public class TestAddAndDeletePersonsToRanorex {
         steps.selectGender(Gender2);
         steps.clickAddButton();
 
-        steps.checkTablesRow(numberOfSecondRow, expectedFirstName2, expectedLastName2, expectedGender2, expectedCategory2);
+        steps.isActualFirstNameEqualsWithExpected(numberOfSecondRow, expectedFirstName2);
+        steps.isActualLastNameEqualsWithExpected(numberOfSecondRow, expectedLastName2);
+        steps.isActualGenderEqualsWithExpected(numberOfSecondRow, expectedGender2);
+        steps.isActualCategoryEqualsWithExpected(numberOfSecondRow, expectedCategory2);
     }
 
     @Test
     public void deleteTwoPersonsTest(){
+
         steps.openPage();
-        steps.enterFirstName(expectedFirstName);
-        steps.enterLastName(expectedLastName);
-        steps.selectCategory(expectedCategory);
+        steps.enterFirstName(expectedFirstName1);
+        steps.enterLastName(expectedLastName1);
+        steps.selectCategory(expectedCategory1);
         steps.selectGender(Gender1);
         steps.clickAddButton();
 
